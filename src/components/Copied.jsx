@@ -13,8 +13,8 @@ const Copied = ({ openSnackbar, setOpenSnackbar }) => {
       autoHideDuration={2000}
       onClose={handleCloseSnackbar}
       anchorOrigin={{
-        vertical: "bottom",
-        horizontal: isMobile ? "center" : "right",
+        vertical: isMobile ? "bottom" : "top",
+        horizontal: "center",
       }}
     >
       <Alert

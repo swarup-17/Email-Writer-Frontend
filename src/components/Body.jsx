@@ -95,7 +95,7 @@ const Body = () => {
                 display: "flex",
                 flexDirection: "column",
                 p: { xs: 1.5, sm: 2, md: 3 },
-                bgcolor: grey[50],
+                bgcolor: grey[100],
                 borderRadius: { xs: 1, sm: 2 },
                 border: `1px solid ${grey[700]}`,
                 transition: "box-shadow 0.3s ease",
@@ -120,7 +120,7 @@ const Body = () => {
               <TextField
                 fullWidth
                 multiline
-                rows={isMobile ? 7 : 12}
+                rows={isMobile ? 7 : 13.3}
                 variant="outlined"
                 label="Original Email Content"
                 placeholder="Paste the email you received here..."

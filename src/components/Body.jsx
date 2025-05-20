@@ -37,13 +37,10 @@ const Body = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.post(
-        "https://email-writer-k8tb.onrender.com/api/email/generate",
-        {
-          emailContent,
-          tone,
-        }
-      );
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}`, {
+        emailContent,
+        tone,
+      });
       setGeneratedReply(
         typeof response.data === "string"
           ? response.data

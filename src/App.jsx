@@ -1,5 +1,4 @@
 import { Container, Paper, Box, useTheme, useMediaQuery } from "@mui/material";
-import { grey } from "@mui/material/colors";
 import Footer from "./components/Footer";
 import Copied from "./components/Copied";
 import Header from "./components/Header";

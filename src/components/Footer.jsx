@@ -1,5 +1,6 @@
 import { Typography, Box, Divider, Link } from "@mui/material";
 import { blue, grey } from "@mui/material/colors";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 
 const Footer = () => {
   return (
@@ -13,6 +14,12 @@ const Footer = () => {
           textAlign: "center",
         }}
       >
+        <ArrowOutwardIcon
+          sx={{
+            fontSize: { xs: 10 },
+            color: "black",
+          }}
+        />
         <Typography variant="caption">
           <Link
             href="https://chromewebstore.google.com/detail/cjabpnjdgodpkanfkfcignmndeebhhkn?utm_source=item-share-cb"
@@ -21,7 +28,7 @@ const Footer = () => {
             underline="hover"
             sx={{ color: grey[600] }}
           >
-            Email Reply Generator
+            Chrome Extension
           </Link>{" "}
           •{" "}
           <Link

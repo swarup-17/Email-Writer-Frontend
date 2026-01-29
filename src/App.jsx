@@ -12,7 +12,7 @@ function App() {
     <Box
       sx={{
         minHeight: "100vh",
-        py: { xs: 2 },
+        py: { xs: 4, sm: 8, md: 10 },
         px: { xs: 1, sm: 2, md: 3 },
       }}
     >

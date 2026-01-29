@@ -1,6 +1,5 @@
 import { Typography, Box, useMediaQuery, useTheme, Link } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
-import { blue } from "@mui/material/colors";
 
 const Header = () => {
   const theme = useTheme();

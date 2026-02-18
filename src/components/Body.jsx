@@ -4,7 +4,7 @@ import HistoryIcon from "@mui/icons-material/History";
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import MenuIcon from '@mui/icons-material/Menu';
 import axios from "axios";
-import Copied from "./Copied";
+import GlobalSnackbar from "./GlobalSnackbar";
 import EmailInput from "./EmailInput";
 import EmailResponse from "./EmailResponse";
 import HistorySidebar from "./HistorySidebar";
@@ -34,7 +34,11 @@ const Body = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "info"
+  });
   const [history, setHistory] = useState(() => {
     const saved = localStorage.getItem("emailHistory");
     return saved ? JSON.parse(saved) : [];
@@ -51,6 +55,14 @@ const Body = () => {
   useEffect(() => {
     localStorage.setItem("emailHistory", JSON.stringify(history));
   }, [history]);
+
+  const handleCloseSnackbar = () => {
+    setSnackbar({ ...snackbar, open: false });
+  };
+
+  const showSnackbar = (message, severity = "info") => {
+    setSnackbar({ open: true, message, severity });
+  };
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -73,7 +85,9 @@ const Body = () => {
           }, 100);
       }
     } catch (error) {
-      setError("Failed to generate email reply. Please try again");
+      const errorMessage = "Failed to generate email reply. Please try again";
+      setError(errorMessage);
+      showSnackbar(errorMessage, "error");
       console.error(error);
     } finally {
       setLoading(false);
@@ -86,8 +100,8 @@ const Body = () => {
     setIsRefining(true);
     try {
       const response = await axios.post(`${import.meta.env.VITE_API_URL}`, {
-        emailContent: generatedReply, 
-        originalContent: generatedReply,
+        emailContent: emailContent, // Pass the original email context
+        originalContent: generatedReply, // Pass the current draft to be refined
         refinementInstruction,
         tone,
       });
@@ -100,7 +114,9 @@ const Body = () => {
       setRefinementInstruction("");
       setIsRefining(false);
     } catch (error) {
-      setError("Failed to refine email. Please try again");
+      const errorMessage = "Failed to refine email. Please try again";
+      setError(errorMessage);
+      showSnackbar(errorMessage, "error");
       console.error(error);
     } finally {
       setLoading(false);
@@ -139,7 +155,7 @@ const Body = () => {
   const handleCopy = () => {
     navigator.clipboard.writeText(generatedReply);
     setCopied(true);
-    setOpenSnackbar(true);
+    showSnackbar("Copied to clipboard!", "success");
     setTimeout(() => setCopied(false), 1000);
   };
 
@@ -283,10 +299,12 @@ const Body = () => {
         </Fab>
       )}
 
-      {/* Snackbar */}
-      <Copied
-        openSnackbar={openSnackbar}
-        setOpenSnackbar={setOpenSnackbar}
+      {/* Global Snackbar */}
+      <GlobalSnackbar
+        open={snackbar.open}
+        message={snackbar.message}
+        severity={snackbar.severity}
+        onClose={handleCloseSnackbar}
       />
     </Box>
   );

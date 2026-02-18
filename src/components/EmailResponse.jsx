@@ -95,20 +95,15 @@ const EmailResponse = ({ generatedReply, loading, isRefining, handleRefine, refi
               }}
            />
            <Button
-              variant="outlined"
+              variant="contained"
+              color="primary"
               onClick={handleRefine}
               disabled={loading || !refinementInstruction.trim() || !generatedReply}
               sx={{
                   minWidth: '90px',
                    borderRadius: '12px',
-                   borderWidth: '1px',
-                   borderColor: '#cbd5e1',
-                   color: '#475569',
-                   '&:hover': {
-                       borderColor: '#6366f1',
-                       color: '#6366f1',
-                       background: 'rgba(99, 102, 241, 0.05)'
-                   }
+                   textTransform: 'none',
+                   fontWeight: 600
               }}
            >
                {isRefining ? <CircularProgress size={20} color="inherit" /> : "Refine"}

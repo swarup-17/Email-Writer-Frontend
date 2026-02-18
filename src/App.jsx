@@ -1,5 +1,5 @@
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
-import Copied from "./components/Copied";
+
 import Body from "./components/Body";
 import theme from "./theme";
 
@@ -30,7 +30,7 @@ function App() {
           <Body />
         </Box>
 
-        <Copied />
+
       </Box>
     </ThemeProvider>
   );

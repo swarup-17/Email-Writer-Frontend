@@ -1,34 +1,34 @@
 import { Snackbar, Alert, useMediaQuery } from "@mui/material";
-import { teal } from "@mui/material/colors";
 import theme from "../theme";
 
-const Copied = ({ openSnackbar, setOpenSnackbar }) => {
+const GlobalSnackbar = ({ open, message, severity, onClose }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
+  
   return (
     <Snackbar
-      open={openSnackbar}
-      autoHideDuration={2000}
-      onClose={handleCloseSnackbar}
+      open={open}
+      autoHideDuration={3000}
+      onClose={onClose}
       anchorOrigin={{
         vertical: isMobile ? "bottom" : "top",
         horizontal: "center",
       }}
     >
       <Alert
-        severity="success"
+        onClose={onClose}
+        severity={severity}
         variant="filled"
         sx={{
+          width: '100%',
           boxShadow: "0px 3px 10px rgba(0, 0, 0, 0.2)",
-          bgcolor: teal[600],
+          fontWeight: 500,
+          borderRadius: 2
         }}
       >
-        Copied to clipboard!
+        {message}
       </Alert>
     </Snackbar>
   );
 };
 
-export default Copied;
+export default GlobalSnackbar;
